@@ -1,0 +1,22 @@
+name: Nightly test
+
+on:
+  pull_request:
+  merge_group:
+  push:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref_name != 'main' }}
+
+jobs:
+  dummy:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run
+        shell: sh
+        run: |
+          foo
+          echo hello
